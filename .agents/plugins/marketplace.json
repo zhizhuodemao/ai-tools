@@ -1,0 +1,20 @@
+{
+  "name": "boss-resume-agent-marketplace",
+  "interface": {
+    "displayName": "BOSS Resume Agent"
+  },
+  "plugins": [
+    {
+      "name": "boss-resume-agent-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/boss-resume-agent-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

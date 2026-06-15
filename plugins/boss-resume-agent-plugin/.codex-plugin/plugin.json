@@ -1,0 +1,35 @@
+{
+  "name": "boss-resume-agent-plugin",
+  "version": "1.0.1",
+  "description": "BOSS resume-profiled job search and guarded automation agent for Codex, using Kimi WebBridge as the only browser backend.",
+  "author": {
+    "name": "普通人学 AI"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "boss",
+    "resume",
+    "job-search",
+    "automation",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "BOSS 简历投递助手",
+    "shortDescription": "使用 Kimi WebBridge 先理解简历，再理解岗位，最后创建受控自动化任务。",
+    "longDescription": "BOSS 简历投递助手帮助 Codex 从简历画像出发，通过 Kimi WebBridge 多方向查看真实岗位和公司信息，基于固定指标判断匹配度，并在用户确认策略和限额后创建受控自动化任务。此插件不使用 Codex Chrome 作为浏览器后端。",
+    "developerName": "普通人学 AI",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Browser",
+      "Automation"
+    ],
+    "defaultPrompt": [
+      "使用 Kimi 打开 BOSS，先建立画像，不要直接投递。",
+      "用 Kimi 查看岗位和公司信息，生成匹配报告。",
+      "在我确认限额后，创建受控自动化任务。"
+    ],
+    "brandColor": "#2563EB"
+  }
+}
