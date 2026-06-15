@@ -9,6 +9,29 @@ $TargetPluginDir = Join-Path $TargetPluginParent $PluginName
 $MarketplaceDir = Join-Path $HOME ".agents\plugins"
 $MarketplaceFile = Join-Path $MarketplaceDir "marketplace.json"
 
+function Get-PluginVersion {
+    param([string]$PluginDir)
+
+    if (-not (Test-Path $PluginDir)) {
+        return "Not installed"
+    }
+
+    $manifest = Join-Path $PluginDir ".codex-plugin\plugin.json"
+    if (-not (Test-Path $manifest)) {
+        return "Installed, but version cannot be read"
+    }
+
+    try {
+        $payload = Get-Content -LiteralPath $manifest -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($payload.version) {
+            return $payload.version
+        }
+        return "Installed, but version is not declared"
+    } catch {
+        return "Installed, but plugin.json is invalid"
+    }
+}
+
 function Update-Marketplace {
     if (Test-Path $MarketplaceFile) {
         $raw = Get-Content -LiteralPath $MarketplaceFile -Raw -Encoding UTF8
@@ -68,9 +91,12 @@ function Install-Plugin {
     Update-Marketplace
 }
 
+$SourceVersion = Get-PluginVersion $SourcePluginDir
+$InstalledVersion = Get-PluginVersion $TargetPluginDir
+
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "BOSS Resume Agent Installer"
-$form.Size = New-Object System.Drawing.Size(520, 300)
+$form.Size = New-Object System.Drawing.Size(540, 360)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
 $form.MaximizeBox = $false
@@ -83,22 +109,29 @@ $title.Size = New-Object System.Drawing.Size(460, 32)
 $form.Controls.Add($title)
 
 $body = New-Object System.Windows.Forms.Label
-$body.Text = "This installer copies the plugin to your personal Codex plugin folder and updates your personal marketplace.json. After installation, restart Codex App, open Plugins, and choose Add to Codex."
+$body.Text = "This installer copies the plugin to your personal Codex plugin folder and updates your personal marketplace.json. Confirm the version information below before installing."
 $body.Font = New-Object System.Drawing.Font("Segoe UI", 10)
 $body.Location = New-Object System.Drawing.Point(26, 72)
-$body.Size = New-Object System.Drawing.Size(450, 92)
+$body.Size = New-Object System.Drawing.Size(470, 72)
 $form.Controls.Add($body)
+
+$version = New-Object System.Windows.Forms.Label
+$version.Text = "Package version: $SourceVersion`nInstalled version: $InstalledVersion"
+$version.Font = New-Object System.Drawing.Font("Segoe UI", 10, [System.Drawing.FontStyle]::Bold)
+$version.Location = New-Object System.Drawing.Point(26, 150)
+$version.Size = New-Object System.Drawing.Size(470, 52)
+$form.Controls.Add($version)
 
 $status = New-Object System.Windows.Forms.Label
 $status.Text = "Ready"
 $status.Font = New-Object System.Drawing.Font("Segoe UI", 9)
-$status.Location = New-Object System.Drawing.Point(26, 172)
+$status.Location = New-Object System.Drawing.Point(26, 216)
 $status.Size = New-Object System.Drawing.Size(450, 24)
 $form.Controls.Add($status)
 
 $installButton = New-Object System.Windows.Forms.Button
 $installButton.Text = "Install"
-$installButton.Location = New-Object System.Drawing.Point(286, 210)
+$installButton.Location = New-Object System.Drawing.Point(306, 266)
 $installButton.Size = New-Object System.Drawing.Size(92, 32)
 $installButton.Add_Click({
     try {
@@ -107,7 +140,7 @@ $installButton.Add_Click({
         Install-Plugin
         $status.Text = "Installed successfully"
         [System.Windows.Forms.MessageBox]::Show(
-            "Installation complete.`n`nNext steps:`n1. Restart Codex App`n2. Open Plugins`n3. Add BOSS Resume Agent`n4. Start a new thread",
+            "Installation complete.`n`nInstalled version: $SourceVersion`nPrevious version: $InstalledVersion`n`nNext steps:`n1. Restart Codex App`n2. Open Plugins`n3. Add BOSS Resume Agent`n4. Start a new thread",
             "Installed",
             [System.Windows.Forms.MessageBoxButtons]::OK,
             [System.Windows.Forms.MessageBoxIcon]::Information
@@ -128,7 +161,7 @@ $form.Controls.Add($installButton)
 
 $closeButton = New-Object System.Windows.Forms.Button
 $closeButton.Text = "Close"
-$closeButton.Location = New-Object System.Drawing.Point(394, 210)
+$closeButton.Location = New-Object System.Drawing.Point(414, 266)
 $closeButton.Size = New-Object System.Drawing.Size(92, 32)
 $closeButton.Add_Click({ $form.Close() })
 $form.Controls.Add($closeButton)

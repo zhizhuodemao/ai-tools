@@ -2,11 +2,11 @@
 
 更聪明的 AI 投简历助手：先理解简历，再理解岗位，最后创建受控自动化投递任务。
 
-当前版本：`1.0.1`
+当前版本：`1.0.2`
 
 这个仓库支持两种安装方式：
 
-- 普通用户：下载 `dist/boss-resume-agent-codex-1.0.1.zip`，解压后双击安装器。
+- 普通用户：下载 `dist/boss-resume-agent-codex-1.0.2.zip`，解压后双击安装器。
 - Codex marketplace：直接添加本仓库地址，在 Codex App 的 `Plugins` 里安装。
 
 ## 适合谁
@@ -27,7 +27,7 @@
 
 ### macOS
 
-下载并解压 `dist/boss-resume-agent-codex-1.0.1.zip` 后，双击：
+下载并解压 `dist/boss-resume-agent-codex-1.0.2.zip` 后，双击：
 
 ```text
 BOSS Resume Agent Installer.app
@@ -43,9 +43,15 @@ BOSS Resume Agent Installer.app
 4. 点击 `Add to Codex`。
 5. 新开一个 Codex 线程使用。
 
+安装器会在安装前显示：
+
+- 当前包版本
+- 本机已安装版本
+- 如果没有旧版本，会显示未安装
+
 ### Windows
 
-下载并解压 `dist/boss-resume-agent-codex-1.0.1.zip` 后，双击：
+下载并解压 `dist/boss-resume-agent-codex-1.0.2.zip` 后，双击：
 
 ```text
 install-windows.bat
@@ -61,9 +67,11 @@ install-windows.bat
 4. 点击 `Add to Codex`。
 5. 新开一个 Codex 线程使用。
 
+安装窗口会在点击 `Install` 前显示当前包版本和本机已安装版本。
+
 ## 备用安装：命令行脚本
 
-1. 解压 `boss-resume-agent-codex-1.0.1.zip`。
+1. 解压 `boss-resume-agent-codex-1.0.2.zip`。
 2. 进入解压后的目录。
 3. macOS 用户可以运行安装脚本：
 
@@ -90,7 +98,7 @@ install-macos.command
 这个仓库已经包含 Codex marketplace 结构，用户可以添加 marketplace：
 
 ```bash
-codex plugin marketplace add https://gitee.com/chenwenbo-java/ai-tools.git
+codex plugin marketplace add https://github.com/zhizhuodemao/ai-tools.git
 ```
 
 然后重启 Codex App，在 `Plugins` 里安装「BOSS 简历投递助手」。
@@ -109,7 +117,7 @@ codex plugin marketplace add https://gitee.com/chenwenbo-java/ai-tools.git
 ai-tools/
 ├── .agents/plugins/marketplace.json
 ├── BOSS Resume Agent Installer.app
-├── dist/boss-resume-agent-codex-1.0.1.zip
+├── dist/boss-resume-agent-codex-1.0.2.zip
 ├── install-windows.bat
 ├── install-macos.command
 ├── install-macos.sh

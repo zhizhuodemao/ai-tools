@@ -32,6 +32,29 @@ function writeText(path, content) {
   text.writeToFileAtomicallyEncodingError(path, true, $.NSUTF8StringEncoding, null);
 }
 
+function pluginManifestPath(pluginDir) {
+  return pluginDir + "/.codex-plugin/plugin.json";
+}
+
+function readPluginVersion(pluginDir) {
+  if (!exists(pluginDir)) {
+    return "未安装";
+  }
+
+  const manifestPath = pluginManifestPath(pluginDir);
+  const manifestText = readText(manifestPath);
+  if (!manifestText) {
+    return "已安装，但无法读取版本";
+  }
+
+  try {
+    const payload = JSON.parse(manifestText);
+    return payload.version || "已安装，但未声明版本";
+  } catch (error) {
+    return "已安装，但版本文件不是有效 JSON";
+  }
+}
+
 function ensureDir(path) {
   app.doShellScript("/bin/mkdir -p " + shellQuote(path));
 }
@@ -56,14 +79,19 @@ function main() {
 
   if (!exists(sourcePluginDir)) {
     show(
-      "找不到插件目录：\n" + sourcePluginDir + "\n\n请确认安装器还在解压后的 boss-resume-agent-codex-1.0.1 目录里。",
+      "找不到插件目录：\n" + sourcePluginDir + "\n\n请确认安装器还在解压后的 boss-resume-agent-codex-1.0.2 目录里。",
       "无法安装"
     );
     return;
   }
 
+  const sourceVersion = readPluginVersion(sourcePluginDir);
+  const installedVersion = readPluginVersion(targetPluginDir);
+
   app.displayDialog(
-    "这会安装「BOSS 简历投递助手」到 Codex App 的个人插件目录。\n\n安装后请重启 Codex App，然后在 Plugins 里点击 Add to Codex。",
+    "这会安装「BOSS 简历投递助手」到 Codex App 的个人插件目录。\n\n当前包版本：" + sourceVersion +
+      "\n已安装版本：" + installedVersion +
+      "\n\n安装后请重启 Codex App，然后在 Plugins 里点击 Add to Codex。",
     {
       withTitle: "安装 BOSS 简历投递助手",
       buttons: ["取消", "安装"],
@@ -134,7 +162,9 @@ function main() {
   writeText(marketplaceFile, JSON.stringify(payload, null, 2) + "\n");
 
   show(
-    "安装完成。\n\n下一步：\n1. 重启 Codex App\n2. 打开 Plugins\n3. 找到「BOSS 简历投递助手」\n4. 点击 Add to Codex\n5. 新开线程使用",
+    "安装完成。\n\n已安装版本：" + sourceVersion +
+      "\n之前版本：" + installedVersion +
+      "\n\n下一步：\n1. 重启 Codex App\n2. 打开 Plugins\n3. 找到「BOSS 简历投递助手」\n4. 点击 Add to Codex\n5. 新开线程使用",
     "安装完成"
   );
 }

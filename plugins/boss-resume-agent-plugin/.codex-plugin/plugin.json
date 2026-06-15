@@ -1,6 +1,6 @@
 {
   "name": "boss-resume-agent-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "BOSS resume-profiled job search and guarded automation agent for Codex, using Kimi WebBridge as the only browser backend.",
   "author": {
     "name": "普通人学 AI"
