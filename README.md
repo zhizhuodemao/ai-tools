@@ -2,12 +2,13 @@
 
 更聪明的 AI 投简历助手：先理解简历，再理解岗位，最后创建受控自动化投递任务。
 
-当前版本：`1.0.2`
+当前版本：`1.0.3`
 
-这个仓库支持两种安装方式：
+这个仓库支持三种分发形态：
 
-- 普通用户：下载 `dist/boss-resume-agent-codex-1.0.2.zip`，解压后双击安装器。
-- Codex marketplace：直接添加本仓库地址，在 Codex App 的 `Plugins` 里安装。
+- Codex plugin：下载 `dist/boss-resume-agent-codex-1.0.3.zip`，解压后双击安装器。
+- Codex marketplace：添加本仓库地址，在 Codex App 的 `Plugins` 里安装。
+- Standalone skill：给不支持 Codex plugin、但支持 skill 或 zip 导入的 agent 使用。
 
 ## 适合谁
 
@@ -15,7 +16,7 @@
 
 ## 前置要求
 
-这个插件只使用 Kimi WebBridge 进行浏览器操作，不使用 Codex Chrome。
+这个插件/skill 只使用 Kimi WebBridge 进行浏览器操作，不使用 Codex Chrome。
 
 使用前请确认：
 
@@ -27,7 +28,7 @@
 
 ### macOS
 
-下载并解压 `dist/boss-resume-agent-codex-1.0.2.zip` 后，双击：
+下载并解压 `dist/boss-resume-agent-codex-1.0.3.zip` 后，双击：
 
 ```text
 BOSS Resume Agent Installer.app
@@ -51,7 +52,7 @@ BOSS Resume Agent Installer.app
 
 ### Windows
 
-下载并解压 `dist/boss-resume-agent-codex-1.0.2.zip` 后，双击：
+下载并解压 `dist/boss-resume-agent-codex-1.0.3.zip` 后，双击：
 
 ```text
 install-windows.bat
@@ -71,7 +72,7 @@ install-windows.bat
 
 ## 备用安装：命令行脚本
 
-1. 解压 `boss-resume-agent-codex-1.0.2.zip`。
+1. 解压 `boss-resume-agent-codex-1.0.3.zip`。
 2. 进入解压后的目录。
 3. macOS 用户可以运行安装脚本：
 
@@ -84,6 +85,23 @@ bash install-macos.sh
 ```text
 install-macos.command
 ```
+
+## Standalone skill
+
+如果目标 agent 不支持 Codex plugin，只支持 skill 文件或 zip，可以使用：
+
+- `dist/boss-resume-job-agent-1.0.3.skill`
+- `dist/boss-resume-job-agent-skill-1.0.3.zip`
+
+这两个文件只包含 skill 本体：
+
+```text
+SKILL.md
+agents/openai.yaml
+references/
+```
+
+Standalone skill 不包含 Codex plugin manifest、marketplace、图形安装器或安装脚本，但保留同一套岗位画像、岗位详情、公司页、评分和自动化边界规则。
 
 ## 使用方式
 
@@ -117,7 +135,9 @@ codex plugin marketplace add https://github.com/zhizhuodemao/ai-tools.git
 ai-tools/
 ├── .agents/plugins/marketplace.json
 ├── BOSS Resume Agent Installer.app
-├── dist/boss-resume-agent-codex-1.0.2.zip
+├── dist/boss-resume-agent-codex-1.0.3.zip
+├── dist/boss-resume-job-agent-1.0.3.skill
+├── dist/boss-resume-job-agent-skill-1.0.3.zip
 ├── install-windows.bat
 ├── install-macos.command
 ├── install-macos.sh

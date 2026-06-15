@@ -14,7 +14,7 @@ MARKETPLACE_FILE="$MARKETPLACE_DIR/marketplace.json"
 
 if [ ! -d "$SOURCE_PLUGIN_DIR" ]; then
   echo "找不到插件目录：$SOURCE_PLUGIN_DIR"
-  echo "请确认你是在解压后的 boss-resume-agent-codex-1.0.2 目录内运行本脚本。"
+  echo "请确认你是在解压后的 boss-resume-agent-codex-1.0.3 目录内运行本脚本。"
   exit 1
 fi
 

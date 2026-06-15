@@ -79,7 +79,7 @@ function main() {
 
   if (!exists(sourcePluginDir)) {
     show(
-      "找不到插件目录：\n" + sourcePluginDir + "\n\n请确认安装器还在解压后的 boss-resume-agent-codex-1.0.2 目录里。",
+      "找不到插件目录：\n" + sourcePluginDir + "\n\n请确认安装器还在解压后的 boss-resume-agent-codex-1.0.3 目录里。",
       "无法安装"
     );
     return;
