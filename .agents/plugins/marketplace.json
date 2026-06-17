@@ -1,14 +1,14 @@
 {
-  "name": "boss-resume-agent-marketplace",
+  "name": "ai-tools",
   "interface": {
-    "displayName": "BOSS Resume Agent"
+    "displayName": "普通人学 AI Tools"
   },
   "plugins": [
     {
       "name": "boss-resume-agent-plugin",
       "source": {
         "source": "local",
-        "path": "./plugins/boss-resume-agent-plugin"
+        "path": "./plugin/boss-resume-agent-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",

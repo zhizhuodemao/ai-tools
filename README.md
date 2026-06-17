@@ -1,99 +1,43 @@
-# BOSS 简历投递助手
+# AI Tools
 
-更聪明的 AI 投简历助手：先理解简历，再理解岗位，最后创建受控自动化投递任务。
+普通人学 AI 的 Agent 能力仓库。这个仓库只维护三类能力形态：
 
-当前版本：`1.0.3`
+- `mcp/`: MCP 服务和工具包。
+- `skill/`: 可被支持 Skill 的 Agent 直接使用的技能。
+- `plugin/`: 可在 Codex App 中安装的插件。
 
-这个仓库支持三种分发形态：
+## BOSS 简历投递助手
 
-- Codex plugin：下载 `dist/boss-resume-agent-codex-1.0.3.zip`，解压后双击安装器。
-- Codex marketplace：添加本仓库地址，在 Codex App 的 `Plugins` 里安装。
-- Standalone skill：给不支持 Codex plugin、但支持 skill 或 zip 导入的 agent 使用。
+当前版本：`1.0.5`
 
-## 适合谁
+BOSS 简历投递助手会先理解简历，再通过 Kimi WebBridge 查看真实 BOSS 岗位和公司信息，基于固定指标评分，生成校准报告，并在用户确认策略和限额后创建受控自动化任务。
 
-适合已经有简历、有求职方向，但不想每天重复搜索、筛选、判断和投递的人。
+### Codex App 安装
 
-## 前置要求
-
-这个插件/skill 只使用 Kimi WebBridge 进行浏览器操作，不使用 Codex Chrome。
-
-使用前请确认：
-
-- Codex App 已安装或启用 Kimi WebBridge。
-- Kimi WebBridge 能控制用户已经登录 BOSS 直聘的真实浏览器。
-- 如果 Kimi WebBridge 不可用，本插件会停止并提示修复，不会切换到 Codex Chrome。
-
-## 推荐安装：双击安装器
-
-### macOS
-
-下载并解压 `dist/boss-resume-agent-codex-1.0.3.zip` 后，双击：
-
-```text
-BOSS Resume Agent Installer.app
-```
-
-如果系统提示无法打开未签名应用，可以右键点击这个 app，然后选择 `打开`。
-
-安装完成后：
-
-1. 重启 Codex App。
-2. 打开 Codex App 的 `Plugins`。
-3. 在个人插件源里找到「BOSS 简历投递助手」。
-4. 点击 `Add to Codex`。
-5. 新开一个 Codex 线程使用。
-
-安装器会在安装前显示：
-
-- 当前包版本
-- 本机已安装版本
-- 如果没有旧版本，会显示未安装
-
-### Windows
-
-下载并解压 `dist/boss-resume-agent-codex-1.0.3.zip` 后，双击：
-
-```text
-install-windows.bat
-```
-
-安装器会打开一个小窗口。点击 `Install` 即可。
-
-安装完成后：
-
-1. 重启 Codex App。
-2. 打开 Codex App 的 `Plugins`。
-3. 在个人插件源里找到「BOSS 简历投递助手」。
-4. 点击 `Add to Codex`。
-5. 新开一个 Codex 线程使用。
-
-安装窗口会在点击 `Install` 前显示当前包版本和本机已安装版本。
-
-## 备用安装：命令行脚本
-
-1. 解压 `boss-resume-agent-codex-1.0.3.zip`。
-2. 进入解压后的目录。
-3. macOS 用户可以运行安装脚本：
+适合支持 Codex Plugin 的用户。
 
 ```bash
-bash install-macos.sh
+codex plugin marketplace add https://github.com/zhizhuodemao/ai-tools.git
+codex plugin add boss-resume-agent-plugin@ai-tools
 ```
 
-也可以双击备用入口：
+安装后重启 Codex App 或新开线程，然后可以这样使用：
 
 ```text
-install-macos.command
+使用 BOSS 简历投递助手，用 Kimi 打开 BOSS，先建立我的简历画像和岗位画像，不要直接投递。
 ```
 
-## Standalone skill
+### Standalone Skill 使用
 
-如果目标 agent 不支持 Codex plugin，只支持 skill 文件或 zip，可以使用：
+适合不支持 Codex Plugin、但支持 Skill 的 Agent。
 
-- `dist/boss-resume-job-agent-1.0.3.skill`
-- `dist/boss-resume-job-agent-skill-1.0.3.zip`
+使用这个目录：
 
-这两个文件只包含 skill 本体：
+```text
+skill/boss-resume-job-agent
+```
+
+该目录包含完整技能本体：
 
 ```text
 SKILL.md
@@ -101,61 +45,81 @@ agents/openai.yaml
 references/
 ```
 
-Standalone skill 不包含 Codex plugin manifest、marketplace、图形安装器或安装脚本，但保留同一套岗位画像、岗位详情、公司页、评分和自动化边界规则。
+### Plugin 源码
 
-## 使用方式
-
-新开线程后，可以这样说：
+Codex 插件源码在：
 
 ```text
-使用 BOSS 简历投递助手，用 Kimi 打开 BOSS，先建立我的简历画像和岗位画像，不要直接投递。
+plugin/boss-resume-agent-plugin
 ```
 
-## 可选：作为 marketplace 仓库发布
+其中内嵌同一份 BOSS skill：
 
-这个仓库已经包含 Codex marketplace 结构，用户可以添加 marketplace：
+```text
+plugin/boss-resume-agent-plugin/skills/boss-resume-job-agent
+```
+
+维护规则：先更新 `skill/boss-resume-job-agent`，再同步到插件内嵌目录，保持两边一致。
+
+## 前置要求
+
+BOSS 简历投递助手只使用 Kimi WebBridge 操作用户真实浏览器，不使用 Codex Chrome、in-app browser、Playwright、Selenium 或隐藏 DOM 抓取来替代可见点击。
+
+使用前请确认：
+
+- Kimi WebBridge 已安装并启用。
+- Kimi WebBridge 已连接到用户真实浏览器。
+- 该浏览器已登录 BOSS 直聘。
+
+如果 Kimi WebBridge 不可用，技能会停止并提示安装或连接，不会切换到其他浏览器后端。
+
+## Kimi WebBridge 安装
+
+浏览器扩展：
+
+```text
+https://chromewebstore.google.com/detail/kimi-webbridge/fldmhceldgbpfpkbgopacenieobmligc
+```
+
+macOS / Linux:
 
 ```bash
-codex plugin marketplace add https://github.com/zhizhuodemao/ai-tools.git
+curl -fsSL https://cdn.kimi.com/webbridge/install.sh | bash
 ```
 
-然后重启 Codex App，在 `Plugins` 里安装「BOSS 简历投递助手」。
+Windows PowerShell:
+
+```powershell
+irm https://cdn.kimi.com/webbridge/install.ps1 | iex
+```
 
 ## 重要边界
 
-- 自动化任务创建前，不直接投递。
-- 投递数量、岗位方向、城市薪资等必须由用户确认。
+- 自动化任务创建前，不直接投递、不打招呼、不收藏、不标记感兴趣。
+- 投递数量、岗位方向、城市、薪资和沟通限额必须由用户确认。
 - 岗位判断必须基于岗位详情和公司信息。
-- 公司页必须尝试打开查看。
+- 每个候选岗位都必须尝试打开公司页。
 - 自动化任务是唯一允许后续投递或沟通的路径。
+- 不绕过验证码、短信、人脸、账号风控、权限弹窗或登录限制。
+- 不保存密码、验证码、cookie、token、浏览器指纹或其他敏感信息。
 
 ## 仓库结构
 
 ```text
 ai-tools/
 ├── .agents/plugins/marketplace.json
-├── BOSS Resume Agent Installer.app
-├── dist/boss-resume-agent-codex-1.0.3.zip
-├── dist/boss-resume-job-agent-1.0.3.skill
-├── dist/boss-resume-job-agent-skill-1.0.3.zip
-├── install-windows.bat
-├── install-macos.command
-├── install-macos.sh
-├── plugins/boss-resume-agent-plugin
-│   ├── .codex-plugin/plugin.json
-│   └── skills/boss-resume-job-agent
+├── mcp/
+│   └── README.md
+├── skill/
+│   └── boss-resume-job-agent/
 │       ├── SKILL.md
 │       ├── agents/openai.yaml
 │       └── references/
+└── plugin/
+    └── boss-resume-agent-plugin/
+        ├── .codex-plugin/plugin.json
+        └── skills/boss-resume-job-agent/
+            ├── SKILL.md
+            ├── agents/openai.yaml
+            └── references/
 ```
-
-## 卸载
-
-1. 在 Codex App 的 `Plugins` 里卸载「BOSS 简历投递助手」。
-2. 可选：删除本地插件目录：
-
-```bash
-rm -rf ~/plugins/boss-resume-agent-plugin
-```
-
-3. 可选：从 `~/.agents/plugins/marketplace.json` 删除 `boss-resume-agent-plugin` 条目。

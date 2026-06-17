@@ -1,4 +1,0 @@
-interface:
-  display_name: "BOSS Resume Job Agent"
-  short_description: "BOSS resume-based job search with Kimi WebBridge and guarded automation"
-  default_prompt: "Use $boss-resume-job-agent with Kimi WebBridge only to build my resume profile, inspect at least 30 clicked BOSS candidates across multiple directions, open every company page, score jobs with evidence, produce a calibration report, ask me to choose daily automation limits, and create a confirmed automation task only after I confirm them. Do not use Codex Chrome. Do not apply or message before the automation task runs."

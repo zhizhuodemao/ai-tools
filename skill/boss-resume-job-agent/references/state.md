@@ -18,8 +18,8 @@ Do not create run folders by default. Use `runs/` only for debugging, failure re
 
 - `profile.json`: resume profile, target profile, constraints, and user feedback.
 - `jobs.jsonl`: one inspected job per line, including detail evidence, company-page evidence, scoring, decision, and greeting strategy.
-- `applications.jsonl`: append-only record of account-changing actions performed only by scheduled execution under an enabled platform automation task.
-- `automation_policy.json`: confirmed policy, user-confirmed daily limits, and scheduler handoff status.
+- `applications.jsonl`: append-only record of account-changing actions performed only by scheduled execution under an enabled automation task.
+- `automation_policy.json`: confirmed policy, user-confirmed daily limits, and automation-task handoff status.
 - `reports/latest.md`: latest human-readable report and blockers.
 
 Do not store passwords, SMS codes, cookies, local storage, session storage, browser profiles, tokens, or secrets.

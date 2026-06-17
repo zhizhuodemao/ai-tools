@@ -1,6 +1,6 @@
 # Scoring
 
-Use this reference before recommending, preparing greeting strategy, or scheduling a job. Applying or messaging is allowed only during scheduled execution under an enabled platform automation task.
+Use this reference before recommending, preparing greeting strategy, or scheduling a job. Applying or messaging is allowed only during scheduled execution under an enabled automation task.
 
 ## Required Record
 
@@ -66,6 +66,6 @@ Greeting strategy must use only resume evidence and JD facts. Keep it short, spe
 
 Do not apply, message, favorite, mark interest, upload, edit resume, change account settings, send contact details, or transmit sensitive information during profile, scan, calibration, report, or handoff. User confirmation before automation can confirm policy only; it cannot authorize immediate manual application.
 
-Only scheduled execution under an enabled platform automation task may perform account-changing actions, and only inside the saved policy.
+Only scheduled execution under an enabled automation task may perform account-changing actions, and only inside the saved policy.
 
 Stop for login, CAPTCHA, SMS, password, face verification, account risk, permission prompts, mismatched job page, company-page blocker for a recommended job, or uncertainty about whether an action changes account state.

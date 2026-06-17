@@ -1,21 +1,46 @@
 # Browser
 
-Use this reference for all live BOSS browser work. This skill uses Kimi WebBridge as the only browser backend.
+Use this reference for all live BOSS browser work. This skill uses Kimi WebBridge as the only browser backend. Kimi WebBridge must be installed, enabled, and connected to the user's real logged-in browser session.
 
 ```text
-Kimi health check -> navigate/find_tab -> snapshot -> @e target -> wait >= 3s -> click/fill -> wait >= 3s -> snapshot -> record
+Kimi WebBridge health check -> navigate/find_tab -> snapshot -> visible target -> wait >= 3s -> click/fill -> wait >= 3s -> snapshot -> record
 ```
 
-## Kimi-Only Rule
+## Kimi WebBridge Rule
 
-- Use the `kimi-webbridge` skill for all BOSS browser interaction.
-- Do not use `chrome:control-chrome`, Codex Chrome, the in-app browser, Playwright, Selenium, hidden DOM scraping, or URL-construction workflows for BOSS discovery or actions.
-- If Kimi WebBridge is unavailable, unhealthy, blocked, or not connected to the user's logged-in browser, stop and report the blocker. Ask the user to install, enable, reconnect, or relaunch Kimi WebBridge.
-- Do not switch browser backend mid-run. A blocked Kimi session is a blocker, not permission to fall back to another browser tool.
+- Use Kimi WebBridge for all BOSS browser interaction.
+- If Kimi WebBridge is unavailable, unhealthy, blocked, or not connected to the user's logged-in browser, stop and report the blocker. Ask the user to install, enable, reconnect, or relaunch Kimi WebBridge from the provided download or installation link.
+- Do not use any browser backend other than Kimi WebBridge for BOSS discovery or actions.
+- Do not use JS evaluation, CSS locator scripts, hidden DOM reads, generated job URL arrays, or direct `job_detail` URL construction as a substitute for visible Kimi WebBridge clicks.
+- Do not switch browser backend mid-run. A blocked Kimi WebBridge session is a blocker, not permission to fall back to another browser path.
+
+## Kimi WebBridge Installation
+
+If Kimi WebBridge is missing or not connected, stop the BOSS workflow and give the user these installation options. Do not continue until the user confirms Kimi WebBridge is installed, enabled, connected, and the browser is logged in to BOSS.
+
+Browser extension page:
+
+```text
+https://chromewebstore.google.com/detail/kimi-webbridge/fldmhceldgbpfpkbgopacenieobmligc
+```
+
+Terminal install:
+
+```bash
+curl -fsSL https://cdn.kimi.com/webbridge/install.sh | bash
+```
+
+PowerShell install:
+
+```powershell
+irm https://cdn.kimi.com/webbridge/install.ps1 | iex
+```
+
+After installation, Kimi WebBridge lets Kimi control the user's browser to complete tasks. For this skill, it must be connected to the same real browser session where the user is logged in to BOSS.
 
 ## Kimi WebBridge Protocol
 
-Use visible page state and Kimi element references.
+Use visible page state and Kimi WebBridge element references.
 
 Default path:
 
@@ -48,7 +73,7 @@ Wait at least 3 seconds between BOSS operations that may change page state or tr
 
 Observation-only calls such as snapshots can be used for verification, but if unsure whether an action triggers BOSS requests, wait 3 seconds.
 
-Before an enabled platform automation task is running, do not click communicate, apply, favorite, mark interest, send, upload, or resume-edit controls. These controls are reserved for scheduled execution under policy.
+Before an enabled automation task is running, do not click communicate, apply, favorite, mark interest, send, upload, or resume-edit controls. These controls are reserved for scheduled execution under policy.
 
 ## Click-First Rules
 

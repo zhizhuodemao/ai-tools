@@ -1,6 +1,6 @@
 # Automation
 
-Use this reference when creating policy, handing off to a scheduler, or running a scheduled task.
+Use this reference when creating policy, handing off to an automation task, or running a scheduled task.
 
 Automation is the required final handoff for a complete serious run unless the user explicitly chooses report-only mode.
 
@@ -11,7 +11,7 @@ Automation is the required final handoff for a complete serious run unless the u
 
 Default to `safe_monitor` unless the user clearly confirms guarded apply.
 
-Account-changing actions are allowed only during scheduled execution launched by a created platform automation task. Profile, scan, calibration, report, and handoff stages must never apply, message, favorite, mark interest, upload, or edit resumes.
+Account-changing actions are allowed only during scheduled execution launched by a created automation task. Profile, scan, calibration, report, and handoff stages must never apply, message, favorite, mark interest, upload, or edit resumes.
 
 ## Policy Requirements
 
@@ -33,22 +33,21 @@ Do not create or update guarded automation when daily limits are only inferred f
 
 Save confirmed policy to `state/automation_policy.json`.
 
-## Platform Handoff
+## Automation Handoff
 
-After confirmation, create or update a real platform automation task. Do not finish with only a local policy file.
+After confirmation, create or update a real automation task. Do not finish with only a local policy file.
 
-Use the current agent platform's native scheduler, automation, reminder, monitor, or recurring-task tool. In Codex App, discover and use `automation_update`; do not write raw cron instructions by hand when the platform tool exists.
+Create a real automation task when possible. If a real automation task cannot be created, stop and report that automation is unsupported. Do not replace the required automation task with local cron, manual reminders, or immediate application.
 
-Do not apply or message during platform handoff. Handoff creates the task; future scheduled execution performs allowed actions under policy.
+Do not apply or message during handoff. Handoff creates the task; future scheduled execution performs allowed actions under policy.
 
-Record scheduler status in `state/automation_policy.json`:
+Record automation-task status in `state/automation_policy.json`:
 
 ```json
 {
   "enabled": true,
   "mode": "safe_monitor",
-  "platform": "codex_app",
-  "platform_task_created": true,
+  "automation_task_created": true,
   "task_id": "",
   "schedule": "",
   "last_handoff_at": "",
