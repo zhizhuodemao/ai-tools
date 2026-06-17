@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">BOSS Resume Agent</title>
+  <desc id="desc">A briefcase with a routing arrow and check mark.</desc>
+  <defs>
+    <linearGradient id="bg" x1="36" y1="32" x2="220" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset="0.52" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="80" y1="44" x2="184" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+  <path d="M70 91c0-13.255 10.745-24 24-24h68c13.255 0 24 10.745 24 24v10h6c13.255 0 24 10.745 24 24v54c0 13.255-10.745 24-24 24H64c-13.255 0-24-10.745-24-24v-54c0-13.255 10.745-24 24-24h6V91Z" fill="#FFFFFF" opacity="0.96"/>
+  <path d="M93 101V91c0-5.523 4.477-10 10-10h50c5.523 0 10 4.477 10 10v10H93Z" fill="#1E293B" opacity="0.9"/>
+  <path d="M67 137h122M67 167h56" stroke="#1E293B" stroke-width="15" stroke-linecap="round" opacity="0.18"/>
+  <path d="M95 153c17-31 49-38 76-17" fill="none" stroke="#2563EB" stroke-width="14" stroke-linecap="round"/>
+  <path d="M168 118l28 24-36 11" fill="none" stroke="#2563EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 165l20 20 40-46" fill="none" stroke="#16A34A" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M49 58c18-20 50-31 84-31 39 0 73 15 91 40" fill="none" stroke="url(#shine)" stroke-width="18" stroke-linecap="round"/>
+</svg>

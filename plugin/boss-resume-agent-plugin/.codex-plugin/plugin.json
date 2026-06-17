@@ -30,6 +30,8 @@
       "用 Kimi 查看岗位和公司信息，生成匹配报告。",
       "在我确认限额后，创建受控自动化任务。"
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#2563EB",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
   }
 }
